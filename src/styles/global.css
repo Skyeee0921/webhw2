@@ -1,0 +1,191 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark:            #0d1f12;
+  --bg-mid:             #122318;
+  --bg-card:            #172e1e;
+  --gold:               #c9a84c;
+  --gold-light:         #e8c97a;
+  --gold-dark:          #9a7a30;
+  --text-primary:       #f0e8d0;
+  --text-secondary:     #b8a882;
+  --text-muted:         #7a6e58;
+  --border-gold:        rgba(201, 168, 76, 0.45);
+  --border-gold-strong: rgba(201, 168, 76, 0.75);
+  --shadow-gold:        0 0 24px rgba(201, 168, 76, 0.15);
+  --radius-card:        18px;
+  --radius-btn:         999px;
+  --font-serif:         'Noto Serif TC', 'Georgia', serif;
+  --font-sans:          'Noto Sans TC', 'PingFang TC', sans-serif;
+  --transition:         0.35s ease;
+  --desktop-bg:         #E7F2E4;
+  --phone-w:            390px;
+  --phone-ratio:        390 / 844;
+}
+
+/* ── Root lock: no scroll anywhere ───────── */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  /* shows on desktop as the outer background */
+  background-color: var(--desktop-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════════
+   PHONE CONTAINER — Mobile first
+   ════════════════════════════════════════════ */
+
+/* Mobile: fills the entire viewport */
+.app-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+}
+
+/* Atmospheric inner gradient (stays inside phone on desktop via position:absolute) */
+.app-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(22, 65, 32, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 78%, rgba(15, 45, 22, 0.45) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Desktop: phone shell ────────────────── */
+
+@media (min-width: 560px) {
+  .app-wrapper {
+    width: 100%;
+    max-width: var(--phone-w);
+    height: auto;               /* let aspect-ratio determine height */
+    aspect-ratio: var(--phone-ratio);
+    border-radius: 44px;
+    /* multi-layer premium shadow on light desktop bg */
+    box-shadow:
+      0 0 0 1.5px rgba(201, 168, 76, 0.55),
+      0 0 0 4px rgba(6, 14, 7, 0.96),
+      0 0 0 5.5px rgba(201, 168, 76, 0.18),
+      0 32px 72px rgba(0, 0, 0, 0.28),
+      0 12px 32px rgba(0, 0, 0, 0.18),
+      0 0 80px rgba(201, 168, 76, 0.06);
+  }
+
+  /* repurpose as top-glass highlight */
+  .app-wrapper::before {
+    inset: unset;
+    top: 18px;
+    left: 22%;
+    right: 22%;
+    bottom: auto;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 3px;
+    z-index: 10;
+  }
+}
+
+/* ── Buttons ─────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 44px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  transition: all var(--transition);
+  position: relative;
+  outline: none;
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-light) 100%);
+  color: var(--bg-dark);
+  box-shadow:
+    0 4px 20px rgba(201, 168, 76, 0.4),
+    0 0 40px rgba(201, 168, 76, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: btnPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4), 0 0 40px rgba(201,168,76,0.12), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  50% {
+    box-shadow: 0 6px 28px rgba(201,168,76,0.55), 0 0 60px rgba(201,168,76,0.22), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(201, 168, 76, 0.6), 0 0 70px rgba(201, 168, 76, 0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+  animation: none;
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* ── Title Divider ───────────────────────── */
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-gold-strong), transparent);
+  max-width: 80px;
+}
+
+.divider-diamond {
+  color: var(--gold);
+  font-size: 0.6rem;
+}
+
+/* ── Scrollbar ───────────────────────────── */
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-gold); border-radius: 4px; }
