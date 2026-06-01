@@ -1,24 +1,17 @@
-export default function QuestionCard({ question, onAnswer, visible, selectedKey }) {
-  const hasSelection = !!selectedKey
-
+// Renders the ornate double-bordered card (scenario + prompt only).
+// Options are rendered separately in QuizPage to enable staggered float animation.
+export default function QuestionCard({ question }) {
   return (
-    <div className={`question-card ${visible ? 'card-visible' : 'card-hidden'}`}>
-      <div className="question-scenario">
-        <p className="scenario-label">情境</p>
-        <p className="scenario-text">{question.scenario}</p>
-      </div>
-      <p className="question-prompt">{question.prompt}</p>
-      <div className={`options-container ${hasSelection ? 'has-selection' : ''}`}>
-        {Object.entries(question.options).map(([key, text]) => (
-          <button
-            key={key}
-            className={`option-btn ${selectedKey === key ? 'option-selected' : ''}`}
-            onClick={() => !hasSelection && onAnswer(key)}
-          >
-            <span className="option-key">{key}</span>
-            <span className="option-text">{text}</span>
-          </button>
-        ))}
+    <div className="q-frame">
+      {/* corner bracket decorations */}
+      <span className="q-corner q-tl" aria-hidden="true" />
+      <span className="q-corner q-tr" aria-hidden="true" />
+      <span className="q-corner q-bl" aria-hidden="true" />
+      <span className="q-corner q-br" aria-hidden="true" />
+
+      <div className="q-content">
+        <p className="q-scenario">{question.scenario}</p>
+        <p className="q-prompt">{question.prompt}</p>
       </div>
     </div>
   )

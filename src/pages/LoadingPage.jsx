@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import FloatingOrbs from '../components/FloatingOrbs'
 
 export default function LoadingPage({ onDone }) {
   useEffect(() => {
@@ -8,6 +9,9 @@ export default function LoadingPage({ onDone }) {
 
   return (
     <div className="page loading-page">
+      <div className="page-noise" aria-hidden="true" />
+      <FloatingOrbs />
+
       <div className="loading-content">
         <div className="tea-cup-anim">
           <div className="cup-body">

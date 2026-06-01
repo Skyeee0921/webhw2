@@ -1,5 +1,6 @@
 import personalities from '../data/personalities'
 import Button from '../components/Button'
+import FloatingOrbs from '../components/FloatingOrbs'
 
 export default function ResultPage({ mbti, onRestart }) {
   const data = personalities[mbti] || {
@@ -10,6 +11,9 @@ export default function ResultPage({ mbti, onRestart }) {
 
   return (
     <div className="page result-page">
+      <div className="page-noise" aria-hidden="true" />
+      <FloatingOrbs />
+
       <div className="result-content">
         <p className="result-label">你的茶道人格是</p>
         <div className="result-mbti">{data.type}</div>
