@@ -633,3 +633,42 @@
   letter-spacing: 0.04em;
   text-align: left;
 }
+
+/* ════════════════════════════════════════════
+   TEXT FADE-IN — staggered per page
+   ════════════════════════════════════════════ */
+
+@keyframes textFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Start page */
+.start-welcome              { animation: textFadeIn 0.55s 0.36s ease both; }
+.start-lines p:nth-child(1) { animation: textFadeIn 0.5s  0.52s ease both; }
+.start-lines p:nth-child(2) { animation: textFadeIn 0.5s  0.64s ease both; }
+.start-lines p:nth-child(3) { animation: textFadeIn 0.5s  0.76s ease both; }
+.start-footer               { animation: textFadeIn 0.5s  0.92s ease both; }
+
+/* ── Quiz page — text inside the card fades after the frame floats in */
+.content-visible .q-scenario { animation: textFadeIn 0.45s 0.4s  ease both; }
+.content-visible .q-prompt   { animation: textFadeIn 0.45s 0.54s ease both; }
+/* cancel on exit so there's no flash */
+.content-hidden .q-scenario,
+.content-hidden .q-prompt    { animation: none; opacity: 0; }
+
+/* ── Loading page */
+.loading-text { animation: textFadeIn 0.55s 0.38s ease both; }
+
+/* ── Result page */
+.result-label              { animation: textFadeIn 0.5s  0.24s ease both; }
+.result-mbti               { animation: textFadeIn 0.55s 0.4s  ease both; }
+.result-page .title-divider { animation: textFadeIn 0.5s  0.5s  ease both; }
+.result-title              { animation: textFadeIn 0.5s  0.6s  ease both; }
+.result-card               { animation: textFadeIn 0.5s  0.75s ease both; }
+/* re-declare with textFadeIn first, then the pulse glow after fade completes */
+.result-page .btn-gold {
+  animation:
+    textFadeIn 0.5s  0.92s ease both,
+    btnPulse   3.5s  1.42s ease-in-out infinite;
+}

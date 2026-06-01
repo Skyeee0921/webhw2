@@ -11,7 +11,7 @@ export default function StartPage({ onStart }) {
 
       <div className="start-body">
         <p className="start-welcome">
-          歡迎來到 <span className="start-brand">Tealepath</span> ，
+          歡迎來到 Tealepath，
         </p>
         <div className="start-lines">
           <p>一場深度探索梨山茶業世界的奇妙心靈之旅。</p>
